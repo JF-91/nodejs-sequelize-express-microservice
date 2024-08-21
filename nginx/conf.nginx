@@ -1,32 +1,24 @@
-# nginx.conf (ejemplo básico)
 user nginx;
 worker_processes 1;
 
-# Configuración de eventos
 events {
     worker_connections 1024;
 }
 
-# Configuración HTTP
 http {
     include /etc/nginx/mime.types;
     default_type application/octet-stream;
 
-    # Configuración de logs
     access_log /var/log/nginx/access.log;
     error_log /var/log/nginx/error.log;
 
-    # Configuración de servidor
     server {
         listen 80;
 
-        # Nombre del servidor
         server_name localhost;
 
-        # Ruta raíz
         root /usr/share/nginx/html;
 
-        # Configuración de ubicación
         location / {
             try_files $uri $uri/ =404;
         }

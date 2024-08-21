@@ -18,7 +18,6 @@ class Database {
         );
     }
   
-
   async init() {
     try {
       await this.sequelize.authenticate();
@@ -36,6 +35,10 @@ class Database {
     } catch (error) {
       console.error("Error al cerrar la conexión con la base de datos:", error);
     }
+  }
+
+  getConnection() {
+    return this.sequelize;
   }
 }
 
