@@ -36,10 +36,11 @@ class App {
 
   async initModels() {
     this.initModels = new InitModels(this.database.sequelize);
+    await this.initModels.sync(); // Sincroniza las tablas con las relacionesI
   }
 
-  routes() {
-    this.app.use("/", new GlobalRoutes().router);
+  async routes() {
+    this.app.use("/api/v1", new GlobalRoutes().router);
   }
 
   listen() {

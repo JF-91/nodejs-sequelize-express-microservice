@@ -1,4 +1,6 @@
 import { Router } from "express";
+import PagesRoutes from "./pages.routes.mjs";
+import PostsRoutes from "./posts.routes.mjs";
 
 export default class GlobalRoutes {
     constructor() {
@@ -7,14 +9,8 @@ export default class GlobalRoutes {
     }
 
     routes() {
-        return [
-            this.router.get('/', (req, res) => {
-                res.json({ message: 'Hello World' });
-            }),
-            this.router.get('/about', (req, res) => {
-                res.json({ message: 'About Page' });
-            })
-       ];
+        this.router.use('/pages', PagesRoutes); // Prefijo de rutas para páginas
+        this.router.use('/posts', PostsRoutes); // Prefijo de rutas para posts
     }
 }
 
