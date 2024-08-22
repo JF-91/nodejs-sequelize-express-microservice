@@ -36,7 +36,7 @@ class App {
 
   async initModels() {
     this.initModels = new InitModels(this.database.sequelize);
-    await this.initModels.sync(); // Sincroniza las tablas con las relacionesI
+    await this.initModels.sync(); // Sincroniza las tablas con las relaciones
   }
 
   async routes() {

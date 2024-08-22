@@ -20,7 +20,7 @@ class Page extends BaseModel {
   }
 
   static associate(models) {
-    // Una Page tiene muchos Posts
+    // Relaciones una Page tiene muchos Posts (1:N)
     this.hasMany(models.Post, {
       foreignKey: "pageId",
       as: "posts",
