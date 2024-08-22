@@ -1,6 +1,9 @@
 import { Router } from "express";
+import { expressjwt } from "express-jwt";
 import PagesRoutes from "./pages.routes.mjs";
 import PostsRoutes from "./posts.routes.mjs";
+import AuthRoutes from "./auth.routes.mjs";
+import UserRoutes from "./user.routes.mjs";
 
 export default class GlobalRoutes {
     constructor() {
@@ -9,8 +12,15 @@ export default class GlobalRoutes {
     }
 
     routes() {
-        this.router.use('/pages', PagesRoutes); // Prefijo de rutas para páginas
-        this.router.use('/posts', PostsRoutes); // Prefijo de rutas para posts
+        const authMiddleware = expressjwt({
+          secret: process.env.JWT_SECRET,
+          algorithms: ["HS256"],
+        });
+
+        this.router.use("/auth", AuthRoutes);
+        this.router.use("/users", authMiddleware, UserRoutes);
+        this.router.use('/pages', authMiddleware, PagesRoutes);
+        this.router.use('/posts', authMiddleware, PostsRoutes);
     }
 }
 

@@ -1,5 +1,7 @@
 import Page from "./page.model.mjs";
 import Post from "./post.model.mjs";
+import User from "./user.model.mjs";
+import Role from "./role.model.mjs";
 
 class InitModels {
   constructor(sequelize) {
@@ -11,12 +13,16 @@ class InitModels {
   async init() {
     Page.init(this.sequelize);
     Post.init(this.sequelize);
+    User.init(this.sequelize);
+    Role.init(this.sequelize);
   }
 
   associateModels() {
     // Configura las relaciones entre modelos
     Page.associate(this.sequelize.models);
     Post.associate(this.sequelize.models);
+    User.associate(this.sequelize.models);
+    Role.associate(this.sequelize.models);
   }
 
   async sync() {
